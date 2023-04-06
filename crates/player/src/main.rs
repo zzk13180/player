@@ -4,5 +4,5 @@
 )]
 
 pub fn main() {
-    seed::AppBuilder::new().run();
+    player::AppBuilder::new().run();
 }

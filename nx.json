@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
-  "npmScope": "seed-monorepo",
+  "npmScope": "player-monorepo",
   "affected": {
     "defaultBase": "main"
   },

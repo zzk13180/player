@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import angular from '@analogjs/vite-plugin-angular'
-import { viteConfig } from '@seed/viteconfig'
+import { viteConfig } from '@player/viteconfig'
 
 export default defineConfig(env => {
   const plugins = [angular()]

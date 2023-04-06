@@ -1,5 +1,5 @@
 {
-  "name": "@seed/web-angular",
+  "name": "@player/app-web",
   "version": "0.0.0",
   "private": true,
   "main": "index.ts",
@@ -20,7 +20,7 @@
     "@angular/platform-browser-dynamic": "^15.2.6",
     "@angular/platform-server": "^15.2.6",
     "@angular/router": "^15.2.6",
-    "@seed/viteconfig": "workspace:*",
+    "@player/viteconfig": "workspace:*",
     "zone.js": "~0.13.0"
   },
   "devDependencies": {

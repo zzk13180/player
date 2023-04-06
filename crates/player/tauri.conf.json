@@ -7,7 +7,7 @@
     "withGlobalTauri": true
   },
   "package": {
-    "productName": "seed",
+    "productName": "player",
     "version": "0.0.1"
   },
   "tauri": {
@@ -33,7 +33,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "seed",
+      "identifier": "player",
       "longDescription": "",
       "macOS": {
         "entitlements": null,
@@ -62,7 +62,7 @@
         "fullscreen": false,
         "height": 600,
         "resizable": true,
-        "title": "seed",
+        "title": "player",
         "width": 800
       }
     ]

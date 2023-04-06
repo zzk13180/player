@@ -1,5 +1,5 @@
 {
-  "extends": "@seed/tsconfig/tsconfig.json",
+  "extends": "@player/tsconfig/tsconfig.json",
   "compilerOptions": {
     "module": "commonjs",
     "rootDir": ".",
