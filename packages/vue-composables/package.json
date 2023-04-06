@@ -1,0 +1,33 @@
+{
+  "name": "@seed/vue-composables",
+  "version": "0.0.0",
+  "module": "./dist/vue-composables.js",
+  "main": "./dist/vue-composables.js",
+  "exports": {
+    ".": {
+      "import": "./dist/vue-composables.js"
+    },
+    "./*": "./*"
+  },
+  "type": "module",
+  "types": "dist/index.d.ts",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build && vue-tsc --emitDeclarationOnly"
+  },
+  "dependencies": {
+    "@seed/viteconfig": "workspace:*",
+    "vue": "^3.2.47"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.1.0",
+    "@vitejs/plugin-vue-jsx": "^3.0.1",
+    "vite": "^4.2.1"
+  },
+  "peerDependencies": {
+    "vue": "3.x"
+  }
+}

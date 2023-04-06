@@ -1,0 +1,35 @@
+{
+  "name": "@seed/vue-components",
+  "version": "0.0.0",
+  "module": "./dist/vue-components.js",
+  "main": "./dist/vue-components.js",
+  "exports": {
+    ".": {
+      "import": "./dist/vue-components.js"
+    },
+    "./*": "./*"
+  },
+  "type": "module",
+  "types": "dist/index.d.ts",
+  "typings": "dist/index.d.ts",
+  "style": "dist/index.css",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && vue-tsc --emitDeclarationOnly"
+  },
+  "dependencies": {
+    "@seed/viteconfig": "workspace:*",
+    "vue": "^3.2.47"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.1.0",
+    "@vitejs/plugin-vue-jsx": "^3.0.1",
+    "vite": "^4.2.1"
+  },
+  "peerDependencies": {
+    "vue": "3.x"
+  }
+}

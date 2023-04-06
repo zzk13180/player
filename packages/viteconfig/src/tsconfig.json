@@ -1,0 +1,10 @@
+{
+  "extends": "@seed/tsconfig/tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "rootDir": ".",
+    "emitDeclarationOnly": false,
+    "outDir": "../dist"
+  },
+  "include": ["."]
+}
