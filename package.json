@@ -1,5 +1,5 @@
 {
-  "name": "seed-monorepo",
+  "name": "player-monorepo",
   "version": "0.0.0",
   "private": true,
   "workspaces": [
@@ -8,35 +8,11 @@
     "crates/**"
   ],
   "engines": {
-    "node": ">=16",
-    "pnpm": ">=7"
+    "node": ">=18",
+    "pnpm": ">=8"
   },
   "keywords": [
-    "seed",
-    "sample",
-    "monorepo",
-    "rust",
-    "typescript",
-    "pnpm",
-    "lerna",
-    "nx",
-    "vite",
-    "Tauri",
-    "Angular",
-    "Vue",
-    "React",
-    "Lit",
-    "Astro",
-    "poem",
-    "prisma",
-    "async-graphql",
-    "nestjs",
-    "husky",
-    "commitlint",
-    "lint-staged",
-    "prettier",
-    "eslint",
-    "stylelint"
+    "player"
   ],
   "author": "zhangzhankui <zzk13180@gmail.com>",
   "license": "MIT",
