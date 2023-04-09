@@ -1,0 +1,140 @@
+@import '../variables.scss';
+
+.manual-tag-tray {
+  display: flex;
+  height: 170px;
+
+  button {
+    outline: none;
+  }
+
+  .tag-tray-menu-left {
+    margin-right: 10px;
+    min-width: 166px;
+    padding: 12px 0 0 5px;
+    position: relative;
+    text-align: right;
+    width: 166px;
+  }
+
+  .manual-tag-tray-label,
+  .tag-sort-by-toggle,
+  .show-frequency {
+    display: block;
+    font-size: 12px;
+    text-align: right;
+    width: 166px;
+  }
+
+  .manual-tag-tray-label {
+    display: inline;
+    margin-top: 16px;
+  }
+
+  .more-info {
+    display: inline-block;
+    margin-left: 2px;
+  }
+
+  .manual-tag-tray-label-info {
+    background-color: #eeeeee;
+    border: 1px solid #888888;
+    border-radius: 5px;
+    font-size: 12px;
+    opacity: 0;
+    padding: 5px 10px;
+    pointer-events: none;
+    position: absolute;
+    text-align: left;
+    width: 200px;
+    z-index: 30;
+  }
+
+  .more-info:hover + .manual-tag-tray-label-info {
+    opacity: 1;
+  }
+
+  .button-select-all {
+    bottom: 42px;
+    left: 10px;
+    position: absolute;
+  }
+
+  .tag-sort-by-toggle,
+  .show-frequency {
+    background: none;
+    border: none;
+    color: $gray-70;
+    margin-top: 14px;
+    padding-right: 0;
+
+    &:hover {
+      color: $pretty-blue;
+    }
+  }
+
+  .all-the-tags {
+    overflow-y: scroll;
+    padding: 12px 15px;
+    width: 100%;
+
+    @include scrollBarShown;
+  }
+
+  // added on top of .filter-general
+  .manual-tag-tray-filter {
+    border-color: $gray-80;
+    font-size: 15px;
+    padding: 6px 6px 0;
+    position: absolute;
+    right:0;
+    width: 155px;
+
+    &::placeholder {
+      color: $gray-80;
+    }
+  }
+
+  .manual-tag-tray-filter-dark {
+    color: white;
+
+    &::placeholder {
+      color: $gray-20;
+    }
+  }
+}
+
+.button-toggle-batch-mode {
+  bottom: 8px;
+  color: black !important; // else in dark-mode color changes
+  left: 9px;
+  position: absolute;
+}
+
+.button-toggle-batch-mode-dark {
+  background: #333333;
+  color: white !important;
+
+  &:hover {
+    background: #555555;
+  }
+}
+
+.button-toggle-batch-mode-dark-active {
+  background: $pretty-red;
+  color: black !important;
+
+  &:hover {
+    background-color: $pretty-red-lighter;
+  }
+}
+
+.select-all-dark {
+  background: #333333;
+  border: 1px solid #888888;
+  color: white;
+
+  &:hover {
+    background: #555555;
+  }
+}

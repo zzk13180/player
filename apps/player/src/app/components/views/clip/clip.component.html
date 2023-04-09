@@ -1,0 +1,150 @@
+<div
+  [ngStyle]="{
+    height: elHeight + 'px',
+    width: elWidth + 'px'
+  }"
+  class="filmstrip-container"
+  [ngClass]="{ 'compact-margins': compactView }"
+>
+  <!-- ================================= FOLDER VIEW ================================= -->
+
+  <div *ngIf="video.cleanName === '*FOLDER*'; else singleThumbnailDiv">
+    <div
+      #filmstripHolder
+      *ngIf="video.fileName !== '*UP*'; else upFolderDiv"
+      class="video-box folder"
+      (click)="videoClick.emit({ mouseEvent: $event })"
+      (dblclick)="videoClick.emit({ mouseEvent: $event, doubleClick: true })"
+      [ngStyle]="{
+        height: imgHeight + 'px'
+      }"
+    >
+      <!-- ========================== regular folder view ========================== -->
+      <ng-container *ngFor="let idx of [0, 1, 2, 3]">
+        <video
+          *ngIf="noError && !autoplay && folderThumbPaths[idx]"
+          [src]="folderThumbPaths[idx]"
+          [poster]="sanitizer.bypassSecurityTrustUrl(folderPosterPaths[idx])"
+          class="mini-video-thumb {{ 'folder-preview-' + idx }}"
+          [volume]="forceMute ? 0 : 1"
+          onmouseover="this.play().catch((err) => {this.load()})"
+          (mouseout)="stopPreview($event)"
+          loop
+        ></video>
+      </ng-container>
+      <!-- ========================== AUTOPLAY folder view ========================== -->
+      <ng-container *ngFor="let idx of [0, 1, 2, 3]">
+        <video
+          *ngIf="noError && autoplay && appInFocus && folderThumbPaths[idx]"
+          [src]="folderThumbPaths[idx]"
+          [poster]="sanitizer.bypassSecurityTrustUrl(folderPosterPaths[idx])"
+          class="mini-video-thumb {{ 'folder-preview-' + idx }}"
+          [volume]="forceMute ? 0 : 1"
+          onmouseover="this.muted = false;"
+          onmouseout="this.muted = true;"
+          onloadstart="this.muted = true;"
+          loop
+          autoplay
+        ></video>
+      </ng-container>
+    </div>
+
+    <!-- ========================== UP FOLDER ========================== -->
+    <ng-template #upFolderDiv>
+      <div
+        class="video-box folder"
+        (click)="videoClick.emit({ mouseEvent: $event })"
+        (dblclick)="videoClick.emit({ mouseEvent: $event, doubleClick: true })"
+        [ngStyle]="{ height: imgHeight + 'px' }"
+      >
+        <div class="up-icon">
+          <app-icon [icon]="'icon-chevron-left'"></app-icon>
+        </div>
+      </div>
+    </ng-template>
+
+    <!-- ==========================FOLDER TEXT ========================== -->
+    <span
+      *ngIf="showMeta && video.fileName !== '*UP*'"
+      [ngClass]="{ 'larger-font': largerFont }"
+      [ngStyle]="{ color: darkMode ? '#BBBBBB' : '#000000' }"
+      class="title"
+    >
+      {{ video.fileName }}
+      <div class="fileSize" *ngIf="showMeta">
+        {{ video.fileSize | fileSizePipe }} [{{ video.fileSizeDisplay }} files]
+      </div>
+    </span>
+  </div>
+
+  <!-- ================================= SINGLE CLIP ================================= -->
+
+  <ng-template #singleThumbnailDiv>
+    <div class="video-box" [ngStyle]="{ height: imgHeight + 'px' }">
+      <app-icon
+        *ngIf="video.selected"
+        class="selected"
+        [icon]="'icon-show-more-info'"
+      ></app-icon>
+      <span *ngIf="showMeta" class="time">{{ video.durationDisplay }}</span>
+      <span *ngIf="showMeta" class="rez">{{ video.resolution }}</span>
+
+      <!-- ========================== regular view ========================== -->
+      <video
+        *ngIf="noError && !autoplay"
+        [src]="pathToVideo"
+        [poster]="sanitizer.bypassSecurityTrustUrl(poster)"
+        [ngStyle]="{ height: imgHeight + 'px' }"
+        (click)="videoClick.emit({ mouseEvent: $event })"
+        (dblclick)="videoClick.emit({ mouseEvent: $event, doubleClick: true })"
+        (contextmenu)="rightClick.emit({ mouseEvent: $event, item: video })"
+        class="screencap"
+        [volume]="forceMute ? 0 : 1"
+        onmouseover="this.play().catch((err) => {this.load()})"
+        (mouseout)="stopPreview($event)"
+        loop
+      ></video>
+
+      <!-- ========================== AUTOPLAY view ========================== -->
+      <video
+        *ngIf="noError && autoplay && appInFocus"
+        [src]="pathToVideo"
+        [poster]="sanitizer.bypassSecurityTrustUrl(poster)"
+        [ngStyle]="{ height: imgHeight + 'px' }"
+        (click)="videoClick.emit({ mouseEvent: $event })"
+        (dblclick)="videoClick.emit({ mouseEvent: $event, doubleClick: true })"
+        (contextmenu)="rightClick.emit({ mouseEvent: $event, item: video })"
+        class="screencap"
+        [volume]="forceMute ? 0 : 1"
+        onmouseover="this.muted = false;"
+        onmouseout="this.muted = true;"
+        onloadstart="this.muted = true;"
+        onloadeddata="setTimeout(() => { this.play(); }, Math.floor(Math.random() * 500))"
+        loop
+      ></video>
+    </div>
+
+    <!-- ================================= TEXT ================================= -->
+
+    <span
+      *ngIf="showMeta"
+      [ngClass]="{ 'larger-font': largerFont }"
+      [ngStyle]="{ color: darkMode ? '#BBBBBB' : '#000000' }"
+      class="title"
+    >
+      {{ video.cleanName }}
+      <div class="fileSize" *ngIf="showMeta">
+        {{ showMeta ? '(' + video.fileSizeDisplay + ')' : '' }}
+      </div>
+    </span>
+
+    <app-icon
+      class="sheet-icon"
+      [icon]="'icon-show-thumbnails'"
+      (click)="sheetClick.emit()"
+      [ngStyle]="{
+        opacity: this.hover ? 1 : 0
+      }"
+    ></app-icon>
+  </ng-template>
+</div>

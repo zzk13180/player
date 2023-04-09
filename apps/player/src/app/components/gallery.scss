@@ -1,0 +1,91 @@
+@import "variables";
+
+.filesView {
+  height: auto !important;
+  margin: 5px 40px !important;
+
+  .length {
+    transform: translate(0px, 1px) !important;
+  }
+
+  .size {
+    text-align: right;
+    transform: translate(-35px, 1px) !important;
+    width: 30px;
+  }
+}
+
+.metadata {
+  position: relative;
+}
+
+.length,
+.size {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 10px;
+  position: absolute;
+  z-index: 200;
+  // text-shadow: 0 0 1px black;
+}
+
+.length {
+  right: 0;
+  transform: translate(-4px, -20px);
+}
+
+.size {
+  left: 0;
+  transform: translate(4px, -20px);
+}
+
+.title {
+  -webkit-box-orient: vertical;
+  color: $gray-70;
+  cursor: pointer;
+  display: -webkit-box;
+  font-size: 12px;
+  -webkit-line-clamp: 3;
+  margin: 6px 2px 0px;
+  max-height: 54px;
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+  width: 100%;
+  word-wrap: break-word;
+}
+
+.larger-font {
+  font-size: 16px;
+}
+
+// add arrows styling to what the folder-arrows.pipe puts out
+::ng-deep .icon-arrow:before {
+  color: $gray-50;
+  content: '\f1a0'; // chevron-right
+  display: inline-block;
+  font-family: "vh-icon-font";
+  font-style: normal;
+  margin: 0 5px;
+}
+
+.gallery {
+  align-content: flex-start;
+  display: flex;
+  flex-flow: row wrap;
+  font-size: 0;
+  margin-top: 10px;
+  padding: 1px;
+}
+
+.item {
+  flex: auto;
+  margin: 15px 15px 50px;
+}
+
+.fileNamePadding {
+  margin-bottom: 15px !important;
+}
+
+.whenFilenamesHidden {
+  margin-bottom: 30px !important;
+}

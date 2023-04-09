@@ -1,0 +1,43 @@
+<div
+  *ngFor="let tag of _tags"
+  class="singleTag"
+>
+  <span
+    *ngIf="tag.removable"
+    class="coverTheX"
+    [ngClass]="{ 'coverTheX-dark': darkMode }"
+  >
+    &ensp;
+  </span>
+  <span
+    class="search-or-tag-general tag"
+    [ngClass]="{ 'tag-draggable': draggable }"
+    [ngStyle]="{ background: tag.colour }"
+    (click)="tagClick(tag, $event)"
+    [draggable]='draggable'
+    (dragstart)="dragStart($event)"
+  >
+    {{ tag.name }}
+  </span>
+
+  <span
+    *ngIf="displayFrequency"
+    class="search-or-tag-general tag frequency"
+  >
+    {{ tagService.tagsMap.get(tag.name) }}
+  </span>
+
+  <app-icon
+    *ngIf="tag.removable"
+    [icon]="'icon-close'"
+    class="remove-tag"
+    (click)="removeTag(tag.name)"
+  >
+  </app-icon>
+</div>
+
+<div *ngIf="draggable" style="transform: translate(-100px, -100px)">
+  <span #dragHack class="search-or-tag-general tag special">
+    hack tag
+  </span>
+</div>

@@ -1,0 +1,81 @@
+<div class="manual-tag-tray">
+  <div class="tag-tray-menu-left" *ngIf="!batchTaggingMode; else batchModeExplainer">
+    <button
+      (click)="appState.sortTagsByFrequency = !appState.sortTagsByFrequency"
+      class="tag-sort-by-toggle"
+    >
+      {{
+        (appState.sortTagsByFrequency ? 'TAGS.sortByFrequency' : 'TAGS.sortAlphabetical')
+          | translate
+      }}
+    </button>
+    <button
+      (click)="manualTagShowFrequency = !manualTagShowFrequency"
+      class="show-frequency"
+    >
+      {{
+        (manualTagShowFrequency ? 'TAGS.showingFrequency' : 'TAGS.hidingFrequency')
+          | translate
+      }}
+    </button>
+    <input
+      (keyup.esc)="manualTagFilterString = ''"
+      [(ngModel)]="manualTagFilterString"
+      class="filter-general manual-tag-tray-filter"
+      [ngClass]="{ 'manual-tag-tray-filter-dark': settingsButtons['darkMode'].toggled }"
+      placeholder="{{ 'TAGS.filterTags' | translate }}"
+    />
+  </div>
+
+  <ng-template #batchModeExplainer>
+    <div class="tag-tray-menu-left">
+      <span
+        class="manual-tag-tray-label"
+        [ngStyle]="{ color: darkMode ? 'white' : 'black' }"
+      >
+        {{ 'TAGS.clickVideoToSelect' | translate }}
+      </span>
+
+      <span class="more-info"> i </span>
+
+      <div class="manual-tag-tray-label-info" style="line-height: 24px">
+        {{ 'TAGS.clickTagToAdd' | translate }}
+      </div>
+
+      <button
+        class="wizard-button wizard-button-small button-select-all"
+        [ngClass]="{ 'select-all-dark': settingsButtons['darkMode'].toggled }"
+        (click)="selectAll.emit()"
+      >
+        {{ 'TAGS.selectAllButton' | translate }}
+      </button>
+    </div>
+  </ng-template>
+
+  <button
+    class="wizard-button wizard-button-small button-toggle-batch-mode"
+    [ngClass]="{
+      'button-toggle-batch-mode-dark': settingsButtons['darkMode'].toggled,
+      'button-toggle-batch-mode-dark-active':
+        settingsButtons['darkMode'].toggled && batchTaggingMode,
+      'edit-mode-active': batchTaggingMode
+    }"
+    (click)="toggleBatchTaggingMode.emit()"
+  >
+    {{ 'TAGS.batchModeButton' | translate }}
+  </button>
+
+  <app-view-tags-component
+    class="all-the-tags"
+    [draggable]="true"
+    [displayFrequency]="manualTagShowFrequency"
+    [tags]="
+      manualTagsService.tagsList
+        | manualTagSortPipe
+          : manualTagFilterString
+          : appState.sortTagsByFrequency
+          : manualTagsService.pipeToggleHack
+    "
+    (tagClicked)="handleTagWordClicked.emit($event)"
+  ></app-view-tags-component>
+</div>

@@ -1,0 +1,137 @@
+@import "../variables";
+
+.title-bar {
+  background-color: $gray-40;
+  border-bottom: 1px solid $gray-60;
+  height: 20px;
+  position: relative;
+  transition: 300ms;
+  width: 100%;
+  z-index: 9999;
+
+  img {
+    position: relative;
+    top: 1px;
+  }
+}
+
+.draggable {
+  -webkit-app-region: drag;
+  color: $gray-70;
+  font-size: 12px;
+  margin-top: 4px;
+  overflow: hidden;
+  position: absolute;
+  text-align: center;
+  transition: 300ms;
+  white-space: nowrap;
+  width: calc(100vw - 70px);
+}
+
+.window-button {
+  display: inline-block;
+  width: 15px;
+}
+
+.top-logo {
+  margin: -2px 8px 0 4px;
+}
+
+.heading-title {
+  display: inline-block;
+  transform: translate(0, -3px);
+}
+
+.windows-button {
+  cursor: pointer;
+  fill: $gray-80;
+  position: fixed;
+  transition: 600ms;
+  transition-property: fill;
+
+  &.closeButton {
+    padding-right: 7px;
+    padding-top: 2px;
+    right: 0;
+  }
+
+  &.maximizeButton {
+    padding-top: 2px;
+    right: 26px;
+  }
+
+  &.minimizeButton {
+    padding-top: 2px;
+    right: 46px;
+  }
+
+  &:hover {
+    fill: $pretty-red;
+    transition: 200ms;
+    transition-property: fill;
+  }
+}
+
+.mac-button {
+  border-radius: 50%;
+  box-sizing: border-box;
+  cursor: pointer;
+  height: 13px;
+  padding: 0;
+  position: fixed;
+  top: 4px;
+  transition: 400ms;
+  width: 13px;
+
+  &.closeButton {
+    background: $close-button;
+    fill: $close-button;
+    left: 6px;
+
+    & .window-button {
+      transform: translate(-1px, -1px) !important;
+    }
+  }
+
+  &.maximizeButton {
+    background: $maximize-button;
+    fill: $maximize-button;
+    left: 46px;
+
+    & .window-button {
+      transform: translate(-1px, -1px) !important;
+    }
+  }
+
+  &.minimizeButton {
+    background: $minimize-botton;
+    fill: $minimize-botton;
+    left: 26px;
+
+    & .window-button {
+      transform: translate(-1px, -1px) !important;
+    }
+  }
+
+  &:hover {
+    fill: $black;
+    transition: 200ms;
+  }
+}
+
+.dark-mode-override { // needs to be after titleBar and windows-button and draggable
+  background: $gray-85;
+
+  & .draggable {
+    fill: $gray-50;
+  }
+
+  & .windows-button {
+    fill: $gray-30;
+
+    &:hover {
+      fill: $pretty-red;
+      transition: 200ms;
+    }
+  }
+}

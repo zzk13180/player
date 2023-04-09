@@ -1,0 +1,139 @@
+@import "../variables";
+
+.darkModeText {
+  color: $gray-30;
+}
+
+.meta {
+  box-sizing: border-box;
+  display: inline-block;
+  height: 190px;
+  overflow: hidden; // will hide tags that don't fit in 2 lines
+  padding: 0 0 0 20px;
+  vertical-align: top;
+}
+
+.video-box {
+  background-color: black;
+  background-size: cover;
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+  position: relative;
+}
+
+.title {
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  font-size: 12px;
+  -webkit-line-clamp: 3;
+  max-height: 54px;
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+  transition: 300ms;
+  transition-property: font-size;
+  user-select: text;
+  width: 100%;
+  word-wrap: break-word;
+}
+
+.fileSize {
+  display: block;
+  font-size: 10px;
+  margin: 5px 0;
+  opacity: 0.8;
+}
+
+.meta-title {
+  background: transparent;
+  border: 0;
+  outline: none;
+}
+
+.renaming-message {
+  color: $dark-blue;
+}
+
+.renaming-message-dark-mode {
+  color: $light-blue;
+}
+
+.renaming-error {
+  color: $dark-red;
+}
+
+.renaming-error-dark-mode {
+  color: $pretty-red;
+}
+
+.larger-font {
+  font-size: 16px;
+  margin-top: 4px;
+}
+
+.star-rating {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  fill: yellow;
+  height: 20px;
+  margin: 0;
+  opacity: 0.4;
+  outline: none;
+  padding: 0;
+  stroke: #000000;
+  stroke-linejoin: round;
+  stroke-width: 0.3px;
+  width: 20px;
+}
+
+.star-lit {
+  opacity: 1;
+  transform: scale(1.5);
+}
+
+.year {
+  background-color: transparent;
+  border: 0;
+  border-radius: 0;
+  font-size: 10px;
+  outline: none;
+  padding: 0;
+  width: 42px;
+}
+
+.view-tags-holder {
+  @include scrollBar;
+  box-sizing: border-box;
+  display: block;
+  height: 60px;
+  overflow-y: auto;
+  padding-bottom: 2px;
+}
+
+.times-played {
+  display: inline-block;
+  margin: 6px 0 0 6px;
+  vertical-align: top;
+}
+
+textarea {
+  @include scrollBar;
+  background: transparent;
+  border: 0;
+  border-left: 1px solid $gray-30;
+  box-sizing: border-box;
+  font-family: sans-serif;
+  font-size: 12px;
+  margin-top: 5px;
+  outline: none;
+  padding: 0 5px;
+  resize: none;
+  width: 100%;
+}
+
+.notes-dark-mode {
+  border-left: 1px solid $gray-70;
+  color: white;
+}

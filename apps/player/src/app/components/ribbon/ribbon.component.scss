@@ -1,0 +1,11 @@
+.settings-buttons-group {
+  float: left;
+  margin-bottom: 10px;
+  margin-right: 8px;
+  max-height: 23px;
+  z-index: 2;
+
+  &:empty {
+    display: none;
+  }
+}

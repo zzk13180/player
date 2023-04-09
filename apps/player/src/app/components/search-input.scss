@@ -1,0 +1,32 @@
+@import 'variables';
+
+.filter-general {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid $gray-40;
+  box-sizing: border-box;
+  margin: 5px 0 10px;
+  outline: none;
+}
+
+// added on top of .filter-general
+.input-filter {
+  font-size: 15px;
+  padding: 6px 6px 6px 20px;
+  padding-bottom: 0;
+  width: 100%;
+
+  &::placeholder {
+    color: $gray-50;
+  }
+}
+
+.player-args-input {
+  padding-left: 5px;
+  width: 342px;
+}
+
+.extensions-input {
+  padding-left: 5px;
+  width: 376px;
+}

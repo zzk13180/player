@@ -1,0 +1,62 @@
+@import "../variables";
+
+.shortcut-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin: 20px 40px 0;
+  max-height: 700px;
+}
+
+.shortcut-item {
+  line-height: 20px;
+  list-style: none;
+  margin: 0 0 16px 0;
+  min-width: 250px;
+  padding: 0;
+}
+
+.shortcut-key {
+  background: $white;
+  border: 1px solid $gray-50;
+  border-radius: 3px;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+  color: black;
+  display: inline-block;
+  font-style: normal;
+  margin-right: 6px;
+  padding: 3px 5px 3px 5px;
+  text-align: center;
+  width: 16px;
+}
+
+.modifier-key {
+  line-height: 20px;
+  margin: 0 4px;
+  margin-right: initial;
+  padding: 3px 10px;
+  width: initial;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.selected-for-change {
+  box-shadow: 0 0 5px 2px $pretty-blue;
+}
+
+.empty {
+  color: white;
+}
+
+.space-after {
+  margin-bottom: 50px;
+}
+
+@media (max-width: 700px) {
+  .shortcut-container {
+    flex-wrap: nowrap;
+    max-height: initial;
+  }
+}

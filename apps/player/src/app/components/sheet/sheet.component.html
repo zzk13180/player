@@ -1,0 +1,94 @@
+<div
+  class="sheet-modal"
+  [ngClass]="{ 'sheet-modal-dark-mode': darkMode }"
+>
+
+  <app-meta-item
+    class="meta-container"
+    (filterTag)="filterTag.emit($event)"
+
+    [video]="video"
+
+    [imgHeight]="imgHeight"
+    [star]="star"
+
+    [darkMode]="darkMode"
+    [largerFont]="largerFont"
+    [showAutoFileTags]="showAutoFileTags"
+    [showAutoFolderTags]="showAutoFolderTags"
+    [showManualTags]="showManualTags"
+    [showMeta]="showMeta"
+    [showVideoNotes]="showVideoNotes"
+
+    [selectedSourceFolder]="selectedSourceFolder"
+    [renameResponse]="renameResponse.asObservable()"
+  ></app-meta-item>
+
+  <div class="details-zoom-buttons">
+
+    <button
+      (click)="decreaseZoomLevel()"
+      class="defaultSettingsButton"
+    >
+      <app-icon [icon]="'icon-minus'"></app-icon>
+    </button>
+
+    <button
+      (click)="resetZoomLevel()"
+      class="defaultSettingsButton reset-button"
+    >
+      <span>{{ 'SETTINGS.resetZoom' | translate }}</span>
+    </button>
+
+    <button
+      (click)="increaseZoomLevel()"
+      class="defaultSettingsButton"
+    >
+      <app-icon [icon]="'icon-plus'"></app-icon>
+    </button>
+
+  </div>
+
+  <div class="full-path" [ngClass]="{ 'dark-path': darkMode }" (click)="copyToClipboard()">
+    <div class="copy-to-clipboard">
+      <app-icon [icon]="'icon-clipboard'"></app-icon>
+    </div>
+    <span [innerHtml]="pathToVideoFile | folderArrowsPipe"></span>
+  </div>
+
+  <ng-container
+    *ngFor="let _ of ' '.repeat(video.screens).split(''); index as i"
+  >
+    <div
+      [ngStyle]="{
+          height: 'calc((72vw / ' + thumbnailsToDisplay + ') * (9 / 16))',
+          width: 'calc(72vw / ' + thumbnailsToDisplay + ')',
+          padding: 'calc(2% / ' + thumbnailsToDisplay + ')'
+        }"
+      class="filmstrip-container"
+      @modalAnimation
+    >
+      <div
+        #filmstripHolder
+        class="video-box"
+        (click)="openVideoAtTime.emit({ mouseEvent: $event, thumbIndex: i })"
+        [ngStyle]="{
+            height: '100%',
+            'background-image': 'url(' + pathToFilmstripJpg + ')',
+            'background-position-x': (percentOffset * i) + '%'
+          }"
+      >
+        <div
+          class="set-favorite-thumb"
+          (click)="setDefaultScreenshot($event, i)"
+          [ngClass]="{ 'star-selected' : video.defaultScreen === i }"
+        >
+          <app-icon [icon]="'icon-star'"></app-icon>
+        </div>
+        <span *ngIf="showMeta" class="time" @metaAppear>
+          {{ (video.duration / (video.screens + 1)) * (i+1) | lengthPipe }}
+        </span>
+      </div>
+    </div>
+  </ng-container>
+</div>

@@ -1,0 +1,137 @@
+import { Injectable } from '@angular/core'
+import type { TagEmission } from '@player/common/interfaces/shared-interfaces'
+import type { YearEmission } from './../components/views/details/details.component'
+import type { ImageElement } from '@player/common/interfaces/final-object.interface'
+import type {
+  DefaultScreenEmission,
+  StarEmission,
+} from '../components/sheet/sheet.component'
+
+@Injectable({
+  providedIn: 'root',
+})
+export class ImageElementService {
+  public finalArrayNeedsSaving = false
+  public forceStarFilterUpdate = true
+  public imageElements: ImageElement[] = []
+  public recentlyPlayed: ImageElement[] = []
+
+  constructor() {}
+
+  /**
+   * Update imageElements with emission of element
+   * @param emission
+   */
+  HandleEmission(
+    emission: YearEmission | StarEmission | TagEmission | DefaultScreenEmission,
+  ): void {
+    const { index } = emission
+
+    if ('year' in emission) {
+      this.imageElements[index].year = (emission as YearEmission).year
+    } else if ('stars' in emission) {
+      this.imageElements[index].stars = (emission as StarEmission).stars
+      this.forceStarFilterUpdate = !this.forceStarFilterUpdate
+    } else if ('defaultScreen' in emission) {
+      this.imageElements[index].defaultScreen = (
+        emission as DefaultScreenEmission
+      ).defaultScreen
+    } else if ('tag' in emission) {
+      this.handleTagEmission(emission as TagEmission)
+    } else {
+      console.log('THIS SHOULD NOT HAPPEN!')
+    }
+
+    this.finalArrayNeedsSaving = true
+  }
+
+  /**
+   * Searches through the `finalArray` and updates the file name and display name
+   * Should not error out if two files have the same name
+   */
+  replaceFileNameInFinalArray(
+    renameTo: string,
+    oldFileName: string,
+    index: number,
+  ): void {
+    if (this.imageElements[index].fileName === oldFileName) {
+      this.imageElements[index].fileName = renameTo
+      this.imageElements[index].cleanName = renameTo
+        .slice()
+        .substr(0, renameTo.lastIndexOf('.'))
+    }
+
+    this.finalArrayNeedsSaving = true
+  }
+
+  /**
+   * update number of times played & the `lastPlayed` date
+   * @param index
+   */
+  updateNumberOfTimesPlayed(index: number) {
+    this.updateRecentlyPlayed(index)
+
+    this.imageElements[index].lastPlayed = Date.now()
+
+    if (this.imageElements[index].timesPlayed) {
+      this.imageElements[index].timesPlayed++
+    } else {
+      this.imageElements[index].timesPlayed = 1
+    }
+
+    this.finalArrayNeedsSaving = true
+  }
+
+  /**
+   * Toggle heart
+   */
+  toggleHeart(index: number) {
+    if (this.imageElements[index].stars === 5.5) {
+      // "un-favorite" the video
+      this.HandleEmission({
+        index,
+        stars: 0.5,
+      })
+    } else {
+      // "favorite" the video
+      this.HandleEmission({
+        index,
+        stars: 5.5,
+      })
+    }
+  }
+
+  /**
+   * Update recently played
+   *  - remove duplicates
+   *  - trim to at most 7
+   * @param index
+   */
+  updateRecentlyPlayed(index: number) {
+    this.recentlyPlayed = [
+      this.imageElements[index],
+      ...this.recentlyPlayed.filter((element: ImageElement) => {
+        return element.hash !== this.imageElements[index].hash
+      }),
+    ]
+    if (this.recentlyPlayed.length > 7) {
+      this.recentlyPlayed.length = 7
+    }
+  }
+
+  private handleTagEmission(emission: TagEmission): void {
+    const position: number = emission.index
+    if (emission.type === 'add') {
+      if (this.imageElements[position].tags) {
+        this.imageElements[position].tags.push(emission.tag)
+      } else {
+        this.imageElements[position].tags = [emission.tag]
+      }
+    } else {
+      this.imageElements[position].tags.splice(
+        this.imageElements[position].tags.indexOf(emission.tag),
+        1,
+      )
+    }
+  }
+}

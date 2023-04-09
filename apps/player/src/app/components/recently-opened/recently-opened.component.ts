@@ -1,0 +1,16 @@
+import { Component, Input, Output, EventEmitter } from '@angular/core'
+import type { SettingsButtonsType } from '@player/common/todo/settings-buttons'
+
+@Component({
+  selector: 'app-recently-opened',
+  templateUrl: './recently-opened.component.html',
+  styleUrls: ['./recently-opened.component.scss'],
+})
+export class RecentlyOpenedComponent {
+  @Output() openFromHistory = new EventEmitter<number>()
+
+  @Input() settingsButtons: SettingsButtonsType
+  @Input() vhaFileHistory
+
+  constructor() {}
+}

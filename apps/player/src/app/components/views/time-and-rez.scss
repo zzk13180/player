@@ -1,0 +1,77 @@
+.time, .rez {
+  bottom: 3px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 10px;
+  position: absolute;
+  z-index: 2;
+}
+
+.time {
+  right: 4px;
+}
+
+.rez {
+  left: 4px;
+}
+
+.sheet-icon {
+  fill: white;
+  height: 16px;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 16px;
+
+  &:hover {
+    cursor: zoom-in;
+    opacity: 1 !important;
+  }
+}
+
+.not-connected {
+  background-color: yellow;
+  border: 1px solid #999900;
+  border-radius: 5px;
+  display: block;
+  height: 10px;
+  left: 4px;
+  opacity: 0.5;
+  position: absolute;
+  top: 4px;
+  width: 10px;
+  z-index: 2;
+}
+
+.heart {
+  fill: #00000047;
+  left: 0;
+  position: absolute;
+  stroke-opacity: 0.5;
+  stroke: white;
+  top: 0;
+  width: 20px;
+  z-index: 1;
+}
+
+.heart-lit {
+  stroke: #ff2255;
+  fill: #ff2255;
+}
+
+.meta-container,
+.video-box {
+  .heart {
+    opacity: 0;
+  }
+
+  .heart-lit {
+    opacity: 1;
+  }
+
+  &:hover {
+    .heart {
+      opacity: 1
+    }
+  }
+}

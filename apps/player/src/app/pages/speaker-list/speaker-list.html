@@ -1,0 +1,35 @@
+<ion-content fullscreen="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Speakers</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid fixed>
+    <ion-row>
+      <!-- *ngFor="let speaker of speakers" -->
+      <ion-col size="12" size-md="6">
+        <ion-card class="speaker-card">
+          <ion-card-header>
+            <!-- <div (click)="doTranscode()">TODO</div> -->
+            <input type="file" />
+          </ion-card-header>
+          <ion-card-content>
+            <media-player aspect-ratio="16/9">
+              <media-outlet></media-outlet>
+              <div class="media-controls-container">
+                <div class="media-controls">
+                  <media-play-button />
+                  <media-toggle-button class="media-float-button" aria-label="Miniplayer">
+                    <!-- ... -->
+                  </media-toggle-button>
+                </div>
+              </div>
+            </media-player>
+            <div class="media-float-container"></div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

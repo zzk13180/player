@@ -17,6 +17,27 @@ fn is_win_11() -> bool {
     common::is_win_11()
 }
 
+#[cfg(mobile)]
+#[tauri::command]
+fn do_something() {
+    println!("Hello from Mobile111!");
+}
+
+#[cfg(desktop)]
+#[tauri::command]
+fn do_something() {
+    println!("Hello from Desktop!");
+}
+
+#[tauri::command]
+fn run() {
+    if cfg!(mobile) {
+        println!("Hello from Mobile!");
+    } else {
+        println!("Hello from Desktop!");
+    }
+}
+
 #[derive(Default)]
 pub struct AppBuilder {
     setup: Option<SetupHook>,
@@ -45,26 +66,13 @@ impl AppBuilder {
                 }
                 Ok(())
             })
-            .invoke_handler(tauri::generate_handler![greet,is_win_11])
+            .invoke_handler(tauri::generate_handler![
+                greet,
+                is_win_11,
+                do_something,
+                run
+            ])
             .run(tauri::generate_context!())
             .expect("error while running tauri application");
-    }
-}
-
-#[cfg(mobile)]
-fn do_something() {
-    println!("Hello from Mobile111!");
-}
-
-#[cfg(desktop)]
-fn do_something() {
-    println!("Hello from Desktop!");
-}
-
-fn run() {
-    if cfg!(mobile) {
-        println!("Hello from Mobile!");
-    } else {
-        println!("Hello from Desktop!");
     }
 }

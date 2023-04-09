@@ -1,0 +1,245 @@
+<div [id]=i *ngFor="let group of settingsMetaGroup; index as i">
+  <div *ngIf="settingTabToShow == i">
+
+    <span
+      class="setting-heading"
+      style="border-top: 0"
+    >
+      {{ settingsMetaGroupLabels[i] | translate }}
+    </span>
+
+    <div *ngFor="let buttonKey of group">
+      <div *ngIf="buttonKey !== 'break'; else insertBreak">
+        <div
+          class="search-buttons-settings"
+        >
+
+          <span class="setting-heading" *ngIf="settingsButtons[buttonKey]['settingsHeading']">
+            {{ settingsButtons[buttonKey]['settingsHeading'] | translate }}
+          </span>
+
+          <div
+            class="button-description"
+          >
+            <app-button
+              (toggleButton)="toggleButton.emit($event)"
+              [button]="buttonKey"
+              [neverDarkMode]="true"
+              [settingsButtons]="settingsButtons"
+            ></app-button>
+
+            <span
+              *ngIf="settingsButtons[buttonKey].iconName"
+              (click)="toggleHideButton.emit(buttonKey)"
+              class="eye-icon-container icon {{ settingsButtons[buttonKey].hidden ? 'eye-closed' : 'eye-open' }}"
+              title="{{ 'SETTINGS.showHideText' | translate }}"
+            ></span>
+
+            <span
+              class="button-description-text"
+            >
+              {{ settingsButtons[buttonKey].description | translate }}
+
+              <span
+                *ngIf="settingsButtons[buttonKey].moreInfo"
+                class="more-info"
+              >
+                i
+              </span>
+              <span class="tooltip-text">
+                {{ settingsButtons[buttonKey].moreInfo | translate }}
+              </span>
+
+            </span>
+
+          </div>
+
+        </div>
+      </div>
+
+      <ng-template #insertBreak>
+        <br>
+      </ng-template>
+    </div>
+  </div>
+
+  <div class="misc-settings" *ngIf="settingTabToShow == 2 && i == 2">
+
+    <!-- VIDEO PLAYER SETTINGS -->
+
+    <div class="player-settings">
+      {{ 'SETTINGS.preferredPlayer' | translate }}
+    </div>
+
+    <div class="player-current-chosen">
+      {{ appState.preferredVideoPlayer ? appState.preferredVideoPlayer : ('SETTINGS.systemDefault' | translate) }}
+
+      <button
+        class="defaultSettingsButton player-settings-button"
+        (click)="chooseDefaultVideoPlayer.emit()"
+      >
+        {{ 'SETTINGS.chooseVideoPlayer' | translate }}
+      </button>
+
+      <button
+        class="defaultSettingsButton player-settings-button"
+        *ngIf="appState.preferredVideoPlayer"
+        (click)="appState.preferredVideoPlayer = ''"
+      >
+        {{ 'SETTINGS.restorePlayer' | translate }}
+      </button>
+
+    </div>
+
+    <!-- LAUNCH ARGUMENTS -->
+
+    <div
+      *ngIf="appState.preferredVideoPlayer"
+      class="player-settings player-settings-launch-args"
+      [ngStyle]="{ opacity: appState.videoPlayerArgs ? 1 : '0.7' }"
+    >
+      {{ 'SETTINGS.playerArgs' | translate }}
+
+      <input
+        class="filter-general input-filter player-args-input"
+        [(ngModel)]="appState.videoPlayerArgs"
+        type="text"
+      >
+
+    </div>
+
+    <!-- EXTENSIONS -->
+
+    <div
+      class="additional-extenstions"
+      [ngStyle]="{ opacity: (additionalInput || editAdditional) ? 1 : '0.7' }"
+    >
+      {{ 'SETTINGS.additionalExtensions' | translate }}
+    </div>
+
+    <div
+      class="additional-extenstions-setting"
+      [ngStyle]="{ opacity: (additionalInput || editAdditional) ? 1 : '0.7' }"
+    >
+
+      {{ 'SETTINGS.extensions' | translate }}
+
+      <input
+        class="filter-general input-filter extensions-input"
+        [(ngModel)]="additionalInput"
+        type="text"
+        [disabled]="!editAdditional"
+      >
+
+      <button
+        class="defaultSettingsButton player-settings-button"
+        (click)="editAdditionalExtensions()"
+      >
+        {{ (editAdditional ? 'SETTINGS.cancelExtensionsEdit': 'SETTINGS.editExtensionsInput') | translate }}
+      </button>
+
+      <button *ngIf="editAdditional"
+        class="defaultSettingsButton player-settings-button"
+        (click)="applyAdditionalExtensions()"
+      >
+        {{ 'SETTINGS.applyAdditionalExtensions' | translate }}
+      </button>
+    </div>
+
+    <!-- ZOOM BUTTONS -->
+
+    <span class="setting-heading">
+      {{ 'SETTINGS.changeAppZoom' | translate }}
+    </span>
+
+    <div class="zoom-buttons">
+      <button
+        (click)="decreaseZoomLevel.emit()"
+        [ngClass]="{
+          defaultSettingsButton: !settingsButtons['flatIcons'].toggled,
+          flatSettingsButton:    settingsButtons['flatIcons'].toggled
+        }"
+      >
+        <app-icon [icon]="'icon-minus'"></app-icon>
+      </button>
+      <button
+        (click)="resetZoomLevel.emit()"
+        [ngClass]="{
+          defaultSettingsButton: !settingsButtons['flatIcons'].toggled,
+          flatSettingsButton:    settingsButtons['flatIcons'].toggled
+        }"
+        style="margin: 0 10px; max-width: initial; padding: 0 15px;"
+      >
+        <span>{{ 'SETTINGS.resetZoom' | translate }}</span>
+      </button>
+      <button
+        (click)="increaseZoomLevel.emit()"
+        [ngClass]="{
+          defaultSettingsButton: !settingsButtons['flatIcons'].toggled,
+          flatSettingsButton:    settingsButtons['flatIcons'].toggled
+        }"
+      >
+        <app-icon [icon]="'icon-plus'"></app-icon>
+      </button>
+    </div>
+
+    <span class="setting-heading">
+      {{ 'SETTINGS.changeLanguage' | translate }}
+    </span>
+
+    <div style="margin: 20px">
+      <select #langSelect (change)="changeLanguage.emit(langSelect.value)" class="language-drop-down monospace">
+        <option value="en" [selected]="appState.language == 'en'">English</option>
+        <option value="zh" [selected]="appState.language == 'zh'">Chinese ----- 中文</option>
+        <option value="ja" [selected]="appState.language == 'ja'">Japanese ---- 日本語</option>
+      </select>
+    </div>
+
+    <div class="credits-and-help" (click)="openOnlineHelp.emit()">
+      {{ 'SETTINGS.FAQ' | translate }}
+    </div>
+
+    <div class="credits-and-help" style="margin-top: 12px; pointer-events: none">
+      This software uses libraries from the FFmpeg project under the LGPLv2.1
+    </div>
+
+    <div class="app-version">
+      <span>v{{ versionNumber }} {{ demo ? ' DEMO - limited to 50 video files' : '' }}</span>
+      <img width="30px" height="30px" src="./assets/logo.png">
+
+      <ng-container
+        [ngSwitch]="latestVersionAvailable"
+      >
+        <div
+          *ngSwitchCase="undefined"
+          class="version-message check-new-version"
+          (click)="checkForNewVersion.emit()"
+        >
+          {{ 'SETTINGS.checkNewVersion' | translate }}
+        </div>
+        <div
+          *ngSwitchCase="versionNumber"
+          class="version-message you-have-latest"
+        >
+          {{ 'SETTINGS.youHaveLatest' | translate }}
+        </div>
+        <div
+          *ngSwitchCase="'error'"
+          class="version-message version-error"
+        >
+          {{ 'SETTINGS.versionError' | translate }}
+        </div>
+        <div
+          *ngSwitchDefault
+          class="version-message check-new-version you-have-latest"
+          (click)="goDownloadNewVersion.emit()"
+        >
+          {{ 'SETTINGS.newVersionExists' | translate }}
+        </div>
+      </ng-container>
+
+    </div>
+
+  </div>
+
+</div>

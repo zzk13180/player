@@ -1,0 +1,239 @@
+@import "../variables";
+
+.icon-image {
+  transform: translateY(2px);
+  width: 16px;
+}
+
+.statistics {
+  font-size: 12px;
+}
+
+.table-container {
+  display: flex;
+  justify-content: space-evenly;
+
+  .stats-table {
+    font-size: 14px;
+    margin: 10px;
+    max-width: 360px;
+    min-width: 290px;
+  }
+}
+
+.stats-heading {
+  color: $gray-70;
+  display: block;
+  font-size: 14px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.edit-mode-container {
+  display: block;
+  margin-top: 10px;
+  text-align: center;
+
+  button {
+    transition-duration: 0.5s;
+  }
+
+  .button-hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.title {
+  color: $black;
+  font-weight: bold;
+}
+
+.sources {
+  margin-bottom: 20px;
+}
+
+.hub-name {
+  font-size: 20px;
+  font-weight: normal;
+}
+
+.folder {
+  font-style: italic;
+  margin-top: 10px;
+}
+
+.rightCol {
+  padding: 3px 10px;
+  text-align: right;
+}
+
+.span-both {
+  font-weight: bold;
+  padding-bottom: 5px;
+  padding-top: 20px;
+  text-align: center;
+}
+
+.input-sources {
+  display: table;
+  margin: 0 auto;
+  max-width: calc(100% - 200px);
+
+  .input-folder {
+    text-align: left;
+  }
+}
+
+.input-sources-row {
+  display: block;
+  position: relative;
+}
+
+.watch-folder-note {
+  display: block;
+  left: -52px;
+  position: absolute;
+  top: -20px;
+}
+
+.delete-input-folder,
+.rescan-input-folder,
+.input-not-connected {
+  position: absolute;
+  text-align: right;
+  top: 1px;
+}
+
+.delete-input-folder {
+  color: $pretty-red;
+  cursor: not-allowed;
+  font-weight: bold;
+  right: calc(100% + 10px);
+}
+
+.rescan-input-folder {
+  color: $pretty-blue;
+  cursor: pointer;
+  font-weight: bold;
+  right: calc(100% + 47px);
+}
+
+.input-not-connected {
+  cursor: pointer;
+  font-style: italic;
+  min-width: 200px;
+  right: calc(100% + 47px);
+}
+
+@media (max-width: 900px) {
+  .table-container {
+    flex-direction: column;
+
+    .stats-table {
+      margin: 10px auto;
+    }
+  }
+}
+
+.wizard-button {
+  min-width: unset;
+  position: relative;
+}
+
+.number-of-thumbs-deleted {
+  bottom: -26px;
+  color: $pretty-blue;
+  position: absolute;
+  right: 0;
+  width: 100%;
+}
+
+.progress-gradient-animation {
+  animation: gradient 3s infinite;
+  background: linear-gradient(90deg, rgba(255,255,255,0) 35%, $pretty-blue 50% , rgba(255,255,255,0) 65%);
+  background-size: 300%;
+  color: $gray-70;
+  pointer-events: none;
+}
+
+@keyframes gradient {
+  0% {
+    background-position-x: 100%;
+  }
+
+  50% {
+    background-position-x: 0%;
+  }
+
+  100% {
+    background-position-x: 100%;
+  }
+}
+
+.server-section {
+  min-height: 100px;
+}
+
+.port-select {
+  background-color: $gray-10;
+  border: 0;
+  cursor: pointer;
+  font-family: monospace;
+  margin-left: 12px;
+  outline: none;
+  width: 56px;
+}
+
+.ip-address {
+  font-family: monospace;
+}
+
+.server-location {
+  color: $dark-blue;
+  display: flex;
+  font-size: 20px;
+  justify-content: center;
+  line-height: 34px;
+}
+
+.more-info {
+  margin-left: 8px;
+}
+
+.server-title {
+  margin-bottom: 10px;
+}
+
+.or {
+  color: $black;
+  font-size: 14px;
+  margin-right: 14px;
+}
+
+.manual-tag-tray-label-info { // copied from `tag-tray.component.scss`
+  background-color: #eeeeee;
+  border: 1px solid #888888;
+  border-radius: 5px;
+  font-size: 12px;
+  left: calc(50% - 100px); // changed after copy/paste
+  opacity: 0;
+  padding: 5px 10px;
+  pointer-events: none;
+  position: absolute; // changed after copy/paste
+  text-align: left;
+  width: 200px;
+  z-index: 30;
+}
+
+.more-info:hover + .manual-tag-tray-label-info {
+  opacity: 1;
+}
+
+.gray {
+  color: #888888;
+}
+
+.ip-text-container {
+  padding-left: 175px;
+}

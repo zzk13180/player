@@ -1,0 +1,82 @@
+@import "variables";
+
+.click-away-overlay {
+  background-color: rgba(0, 0, 0, 0.1);
+  cursor: initial;
+  height: 100vh;
+  position: fixed;
+  width: 100vw;
+  z-index: 29;
+}
+
+.right-click-menu {
+  background: $gray-10;
+  border: 1px solid $gray-50;
+  border-radius: 10px;
+  box-shadow: 0 3px 7px 3px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  font-size: 12px;
+  overflow: hidden;
+  position: absolute;
+  z-index: 30;
+
+  ul {
+    margin: 0;
+    padding: 10px;
+
+    li {
+      cursor: pointer;
+      list-style-type: none;
+      padding: 6px;
+      transition: 100ms;
+      transition-property: transform text-shadow;
+
+      &:hover {
+        // transform: translate(0, -1px);
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+        transition: 100ms;
+        transition-property: transform text-shadow;
+      }
+    }
+  }
+
+  .right-click-delete {
+    border-top: 1px solid $gray-20;
+    color: $dark-red;
+    margin-top: 6px;
+    padding-top: 14px !important;
+    text-align: center;
+  }
+
+  .right-click-disabled {
+    color: $gray-50;
+    pointer-events: none;
+  }
+}
+
+.rename-popup {
+  background: $gray-10;
+  border: 1px solid $gray-50;
+  border-radius: 10px;
+  box-shadow: 0 3px 7px 3px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  height: 275px;
+  left: 10%;
+  padding: 20px;
+  position: fixed;
+  top: 138px;
+  width: 80%;
+  z-index: 30;
+}
+
+.rename-dark {
+  background: $gray-90;
+}
+
+.dark-mode-on {
+  color: white;
+}
+
+.disable-mouse-clicks {
+  pointer-events: auto;
+}

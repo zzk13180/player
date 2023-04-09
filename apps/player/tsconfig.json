@@ -1,24 +1,31 @@
 {
+  "extends": "@player/tsconfig/tsconfig.json",
   "compileOnSave": false,
   "compilerOptions": {
+    "importsNotUsedAsValues": "remove",
+    "emitDeclarationOnly": false,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "exactOptionalPropertyTypes": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "strict": false,
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
-    "declaration": false,
-    "downlevelIteration": true,
     "experimentalDecorators": true,
-    "module": "esnext",
     "moduleResolution": "node",
-    "importHelpers": true,
-    "target": "es2020",
-    "lib": ["es2018", "dom"]
+    "target": "ES2022",
+    "module": "ES2022",
+    "types": ["vidstack/globals"],
+    "lib": ["ES2022", "dom"]
   },
+  "exclude": ["node_modules"],
+  "include": ["src/main.ts"],
   "angularCompilerOptions": {
-    "enableIvy": true,
-    "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true,
     "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true
+    "strictTemplates": false
   }
 }

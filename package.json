@@ -17,7 +17,9 @@
   "author": "zhangzhankui <zzk13180@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "lerna run dev --scope={@player/app-web,@player/app-tauri}",
+    "dev": "lerna run dev --scope=@player/app-tauri",
+    "build": "lerna run build --scope=@player/app-tauri",
+    "dev:web": "nx run @player/app-web:dev",
     "nx": "nx",
     "graph": "nx graph",
     "commit": "cz",

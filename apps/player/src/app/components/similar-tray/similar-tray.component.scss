@@ -1,0 +1,20 @@
+@import '../variables.scss';
+
+.most-similar-tray {
+  .most-similar-comment {
+    color: $gray-70;
+    display: inline-block;
+    font-size: 12px;
+    margin-left: 20px;
+    margin-top: 20px;
+    min-width: 170px;
+    vertical-align: top;
+    width: 170px;
+  }
+
+  .most-similar-filename {
+    display: block;
+    font-size: 14px;
+    margin-top: 15px;
+  }
+}
